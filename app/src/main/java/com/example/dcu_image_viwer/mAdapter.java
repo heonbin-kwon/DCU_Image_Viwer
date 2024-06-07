@@ -1,25 +1,29 @@
 package com.example.dcu_image_viwer;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 public class mAdapter extends BaseAdapter {
 
     private Context mContext;
-    private int[] data;
+    private ArrayList<String> data;
 
-    public mAdapter(Context mContext,int[] data){
+    public mAdapter(Context mContext,ArrayList<String> data){
         this.mContext = mContext;
         this.data = data;
     }
 
     @Override
     public int getCount() {
-        return data.length;
+        return data.size();
     }
 
     @Override
@@ -35,6 +39,7 @@ public class mAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
+        Bitmap bmp = BitmapFactory.decodeFile(data.get(position));
 
         if(convertView==null){
             imageView = new ImageView(mContext);
@@ -44,7 +49,7 @@ public class mAdapter extends BaseAdapter {
         }else{
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(data[position]);
+        imageView.setImageBitmap(bmp);
 
         return imageView;
     }
